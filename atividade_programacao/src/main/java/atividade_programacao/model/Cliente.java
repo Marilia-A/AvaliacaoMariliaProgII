@@ -1,6 +1,6 @@
 package atividade_programacao.model;
 
-public class ClienteModel {
+public class Cliente {
     private int id; 
     private String nome;
     private String cpf;
@@ -47,9 +47,9 @@ public class ClienteModel {
     }
 
     //construtores
-    public ClienteModel() {
+    public Cliente() {
     }
-    public ClienteModel(int id, String nome, String cpf, String rg, String endereco, String telefone) {
+    public Cliente(int id, String nome, String cpf, String rg, String endereco, String telefone) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;

@@ -1,7 +1,7 @@
 package atividade_programacao.controller;
 
 import atividade_programacao.dao.CategoriaDAO;
-import atividade_programacao.model.CategoriaModel;
+import atividade_programacao.model.Categoria;
 
 public class CategoriaController {
     private CategoriaDAO categoriaDAO;
@@ -10,11 +10,11 @@ public class CategoriaController {
         this.categoriaDAO = new CategoriaDAO();
     }
 
-    public boolean salvar(CategoriaModel categoria) {
+    public boolean salvar(Categoria categoria) {
         return categoriaDAO.salvar(categoria);
     }
 
-    public boolean alterar(CategoriaModel categoria) {
+    public boolean alterar(Categoria categoria) {
         return categoriaDAO.alterar(categoria);
     }
 
@@ -22,7 +22,7 @@ public class CategoriaController {
         return categoriaDAO.excluir(id);
     }
 
-    public CategoriaModel pesquisar(int id) {
+    public Categoria pesquisar(int id) {
         return categoriaDAO.pesquisar(id);
     }
 }

@@ -6,11 +6,11 @@ import atividade_programacao.controller.ClienteController;
 import atividade_programacao.controller.FornecedorController;
 import atividade_programacao.controller.ProdutoController;
 import atividade_programacao.controller.VendaController;
-import atividade_programacao.model.CategoriaModel;
-import atividade_programacao.model.ClienteModel;
-import atividade_programacao.model.FornecedorModel;
-import atividade_programacao.model.ProdutoModel;
-import atividade_programacao.model.VendaModel;
+import atividade_programacao.model.Categoria;
+import atividade_programacao.model.Cliente;
+import atividade_programacao.model.Fornecedor;
+import atividade_programacao.model.Produto;
+import atividade_programacao.model.Venda;
 
 public class Main {
 
@@ -47,7 +47,7 @@ public class Main {
                         opcaoSub = Integer.parseInt(sc.nextLine());
                         switch (opcaoSub) {
                             case 1 -> {
-                                CategoriaModel categoria = new CategoriaModel();
+                                Categoria categoria = new Categoria();
                                 System.out.print("ID da categoria: ");
                                 categoria.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome da categoria: ");
@@ -55,7 +55,7 @@ public class Main {
                                 System.out.println(categoriaController.salvar(categoria) ? "Categoria salva." : "Erro ao salvar.");
                             }
                             case 2 -> {
-                                CategoriaModel categoria = new CategoriaModel();
+                                Categoria categoria = new Categoria();
                                 System.out.print("ID da categoria: ");
                                 categoria.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome da categoria: ");
@@ -70,7 +70,7 @@ public class Main {
                             case 4 -> {
                                 System.out.print("ID da categoria: ");
                                 int id = Integer.parseInt(sc.nextLine());
-                                CategoriaModel categoria = categoriaController.pesquisar(id);
+                                Categoria categoria = categoriaController.pesquisar(id);
                                 if (categoria != null) {
                                     System.out.println("ID: " + categoria.getId() + " | Nome: " + categoria.getNome());
                                 } else { System.out.println("Categoria nao encontrada."); }
@@ -86,7 +86,7 @@ public class Main {
                         opcaoSub = Integer.parseInt(sc.nextLine());
                         switch (opcaoSub) {
                             case 1 -> {
-                                ClienteModel cliente = new ClienteModel();
+                                Cliente cliente = new Cliente();
                                 System.out.print("ID do cliente: ");
                                 cliente.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome: "); cliente.setNome(sc.nextLine());
@@ -97,7 +97,7 @@ public class Main {
                                 System.out.println(clienteController.salvar(cliente) ? "Cliente salvo." : "Erro ao salvar.");
                             }
                             case 2 -> {
-                                ClienteModel cliente = new ClienteModel();
+                                Cliente cliente = new Cliente();
                                 System.out.print("ID do cliente: ");
                                 cliente.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome: "); cliente.setNome(sc.nextLine());
@@ -115,7 +115,7 @@ public class Main {
                             case 4 -> {
                                 System.out.print("ID do cliente: ");
                                 int id = Integer.parseInt(sc.nextLine());
-                                ClienteModel cliente = clienteController.pesquisar(id);
+                                Cliente cliente = clienteController.pesquisar(id);
                                 if (cliente != null) {
                                     System.out.println("ID: " + cliente.getId() + " | Nome: " + cliente.getNome() + " | CPF: " + cliente.getCpf());
                                 } else { System.out.println("Cliente nao encontrado."); }
@@ -131,7 +131,7 @@ public class Main {
                         opcaoSub = Integer.parseInt(sc.nextLine());
                         switch (opcaoSub) {
                             case 1 -> {
-                                FornecedorModel fornecedor = new FornecedorModel();
+                                Fornecedor fornecedor = new Fornecedor();
                                 System.out.print("ID do fornecedor: "); fornecedor.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome fantasia: "); fornecedor.setNome_fantasia(sc.nextLine());
                                 System.out.print("Razao social: "); fornecedor.setRazao_social(sc.nextLine());
@@ -139,7 +139,7 @@ public class Main {
                                 System.out.println(fornecedorController.salvar(fornecedor) ? "Fornecedor salvo." : "Erro ao salvar.");
                             }
                             case 2 -> {
-                                FornecedorModel fornecedor = new FornecedorModel();
+                                Fornecedor fornecedor = new Fornecedor();
                                 System.out.print("ID do fornecedor: "); fornecedor.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome fantasia: "); fornecedor.setNome_fantasia(sc.nextLine());
                                 System.out.print("Razao social: "); fornecedor.setRazao_social(sc.nextLine());
@@ -154,7 +154,7 @@ public class Main {
                             case 4 -> {
                                 System.out.print("ID do fornecedor: ");
                                 int id = Integer.parseInt(sc.nextLine());
-                                FornecedorModel fornecedor = fornecedorController.pesquisar(id);
+                                Fornecedor fornecedor = fornecedorController.pesquisar(id);
                                 if (fornecedor != null) {
                                     System.out.println("ID: " + fornecedor.getId() + " | Fantasia: " + fornecedor.getNome_fantasia());
                                 } else { System.out.println("Fornecedor nao encontrado."); }
@@ -170,8 +170,8 @@ public class Main {
                         opcaoSub = Integer.parseInt(sc.nextLine());
                         switch (opcaoSub) {
                             case 1 -> {
-                                ProdutoModel produto = new ProdutoModel();
-                                CategoriaModel categoria = new CategoriaModel();
+                                Produto produto = new Produto();
+                                Categoria categoria = new Categoria();
                                 System.out.print("ID do produto: "); produto.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome do produto: "); produto.setNome(sc.nextLine());
                                 System.out.print("Preco: "); produto.setPreco(Double.parseDouble(sc.nextLine()));
@@ -181,8 +181,8 @@ public class Main {
                                 System.out.println(produtoController.salvar(produto) ? "Produto salvo." : "Erro ao salvar.");
                             }
                             case 2 -> {
-                                ProdutoModel produto = new ProdutoModel();
-                                CategoriaModel categoria = new CategoriaModel();
+                                Produto produto = new Produto();
+                                Categoria categoria = new Categoria();
                                 System.out.print("ID do produto: "); produto.setId(Integer.parseInt(sc.nextLine()));
                                 System.out.print("Nome do produto: "); produto.setNome(sc.nextLine());
                                 System.out.print("Preco: "); produto.setPreco(Double.parseDouble(sc.nextLine()));
@@ -199,7 +199,7 @@ public class Main {
                             case 4 -> {
                                 System.out.print("ID do produto: ");
                                 int id = Integer.parseInt(sc.nextLine());
-                                ProdutoModel produto = produtoController.pesquisar(id);
+                                Produto produto = produtoController.pesquisar(id);
                                 if (produto != null) {
                                     System.out.println("ID: " + produto.getId() + " | Nome: " + produto.getNome() + " | Estoque: " + produto.getQtd_estoque());
                                 } else { System.out.println("Produto nao encontrado."); }
@@ -214,15 +214,15 @@ public class Main {
                         System.out.print("Ação: ");
                         opcaoSub = Integer.parseInt(sc.nextLine());
                         if (opcaoSub == 1) {
-                            VendaModel venda = new VendaModel();
-                            ClienteModel cliente = new ClienteModel();
-                            ProdutoModel produto = new ProdutoModel();
+                            Venda venda = new Venda();
+                            Cliente cliente = new Cliente();
+                            Produto produto = new Produto();
                             System.out.print("ID da venda: "); venda.setId(Integer.parseInt(sc.nextLine()));
                             System.out.print("ID do cliente: "); cliente.setId(Integer.parseInt(sc.nextLine()));
                             System.out.print("ID do produto: "); produto.setId(Integer.parseInt(sc.nextLine()));
 
-                            ClienteModel clienteBanco = clienteController.pesquisar(cliente.getId());
-                            ProdutoModel produtoBanco = produtoController.pesquisar(produto.getId());
+                            Cliente clienteBanco = clienteController.pesquisar(cliente.getId());
+                            Produto produtoBanco = produtoController.pesquisar(produto.getId());
 
                             if (clienteBanco == null || produtoBanco == null) {
                                 System.out.println("Erro: Cliente ou Produto não encontrados.");
@@ -244,7 +244,7 @@ public class Main {
                         } else if (opcaoSub == 2) {
                             System.out.print("ID da venda: ");
                             int id = Integer.parseInt(sc.nextLine());
-                            VendaModel venda = vendaController.pesquisar(id);
+                            Venda venda = vendaController.pesquisar(id);
                             if (venda != null) {
                                 System.out.println("Venda ID: " + venda.getId() + " | Valor: " + venda.getValor_total());
                             } else { System.out.println("Venda nao encontrada."); }

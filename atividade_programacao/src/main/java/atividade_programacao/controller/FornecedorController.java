@@ -1,7 +1,7 @@
 package atividade_programacao.controller;
 
 import atividade_programacao.dao.FornecedorDAO;
-import atividade_programacao.model.FornecedorModel;
+import atividade_programacao.model.Fornecedor;
 
 public class FornecedorController {
     private FornecedorDAO fornecedorDAO;
@@ -10,11 +10,11 @@ public class FornecedorController {
         this.fornecedorDAO = new FornecedorDAO();
     }
 
-    public boolean salvar(FornecedorModel fornecedor) {
+    public boolean salvar(Fornecedor fornecedor) {
         return fornecedorDAO.salvar(fornecedor);
     }
 
-    public boolean alterar(FornecedorModel fornecedor) {
+    public boolean alterar(Fornecedor fornecedor) {
         return fornecedorDAO.alterar(fornecedor);
     }
 
@@ -22,7 +22,7 @@ public class FornecedorController {
         return fornecedorDAO.excluir(id);
     }
 
-    public FornecedorModel pesquisar(int id) {
+    public Fornecedor pesquisar(int id) {
         return fornecedorDAO.pesquisar(id);
     }
 }

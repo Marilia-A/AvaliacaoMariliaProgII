@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import atividade_programacao.model.FornecedorModel;
+import atividade_programacao.model.Fornecedor;
 
 public class FornecedorDAO {
 
-    public boolean salvar(FornecedorModel fornecedor) {
+    public boolean salvar(Fornecedor fornecedor) {
         String sql = "INSERT INTO fornecedor (id, nome_fantasia, razao_social, cnpj) VALUES (?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
@@ -27,7 +27,7 @@ public class FornecedorDAO {
         }
     }
 
-    public boolean alterar(FornecedorModel fornecedor) {
+    public boolean alterar(Fornecedor fornecedor) {
         String sql = "UPDATE fornecedor SET nome_fantasia = ?, razao_social = ?, cnpj = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -59,7 +59,7 @@ public class FornecedorDAO {
         }
     }
 
-    public FornecedorModel pesquisar(int id) {
+    public Fornecedor pesquisar(int id) {
         String sql = "SELECT id, nome_fantasia, razao_social, cnpj FROM fornecedor WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -69,7 +69,7 @@ public class FornecedorDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    FornecedorModel fornecedor = new FornecedorModel();
+                    Fornecedor fornecedor = new Fornecedor();
                     fornecedor.setId(rs.getInt("id"));
                     fornecedor.setNome_fantasia(rs.getString("nome_fantasia"));
                     fornecedor.setRazao_social(rs.getString("razao_social"));

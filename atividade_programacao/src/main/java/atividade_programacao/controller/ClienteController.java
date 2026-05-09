@@ -1,7 +1,7 @@
 package atividade_programacao.controller;
 
 import atividade_programacao.dao.ClienteDAO;
-import atividade_programacao.model.ClienteModel;
+import atividade_programacao.model.Cliente;
 
 public class ClienteController {
     private ClienteDAO clienteDAO;
@@ -10,11 +10,11 @@ public class ClienteController {
         this.clienteDAO = new ClienteDAO();
     }
 
-    public boolean salvar(ClienteModel cliente) {
+    public boolean salvar(Cliente cliente) {
         return clienteDAO.salvar(cliente);
     }
 
-    public boolean alterar(ClienteModel cliente) {
+    public boolean alterar(Cliente cliente) {
         return clienteDAO.alterar(cliente);
     }
 
@@ -22,7 +22,7 @@ public class ClienteController {
         return clienteDAO.excluir(id);
     }
 
-    public ClienteModel pesquisar(int id) {
+    public Cliente pesquisar(int id) {
         return clienteDAO.pesquisar(id);
     }
 }

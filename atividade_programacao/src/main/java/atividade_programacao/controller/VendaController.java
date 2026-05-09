@@ -3,9 +3,9 @@ package atividade_programacao.controller;
 import atividade_programacao.dao.ClienteDAO;
 import atividade_programacao.dao.ProdutoDAO;
 import atividade_programacao.dao.VendaDAO;
-import atividade_programacao.model.ClienteModel;
-import atividade_programacao.model.ProdutoModel;
-import atividade_programacao.model.VendaModel;
+import atividade_programacao.model.Cliente;
+import atividade_programacao.model.Produto;
+import atividade_programacao.model.Venda;
 
 public class VendaController {
     private VendaDAO vendaDAO;
@@ -18,17 +18,17 @@ public class VendaController {
         this.clienteDAO = new ClienteDAO();
     }
 
-    public boolean salvar(VendaModel venda) {
+    public boolean salvar(Venda venda) {
         if (venda == null || venda.getProduto() == null || venda.getCliente() == null) {
             return false;
         }
 
-        ProdutoModel produtoBanco = produtoDAO.pesquisar(venda.getProduto().getId());
+        Produto produtoBanco = produtoDAO.pesquisar(venda.getProduto().getId());
         if (produtoBanco == null || produtoBanco.getQtd_estoque() < 1) {
             return false;
         }
 
-        ClienteModel clienteBanco = clienteDAO.pesquisar(venda.getCliente().getId());
+        Cliente clienteBanco = clienteDAO.pesquisar(venda.getCliente().getId());
         if (clienteBanco == null) {
             return false;
         }
@@ -41,7 +41,7 @@ public class VendaController {
         return vendaDAO.salvar(venda);
     }
 
-    public boolean alterar(VendaModel venda) {
+    public boolean alterar(Venda venda) {
         return vendaDAO.alterar(venda);
     }
 
@@ -49,7 +49,7 @@ public class VendaController {
         return vendaDAO.excluir(id);
     }
 
-    public VendaModel pesquisar(int id) {
+    public Venda pesquisar(int id) {
         return vendaDAO.pesquisar(id);
     }
 

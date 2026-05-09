@@ -1,6 +1,6 @@
 package atividade_programacao.model;
 
-public class FornecedorModel {
+public class Fornecedor {
     private int id;
     private String nome_fantasia;
     private String razao_social;
@@ -33,13 +33,13 @@ public class FornecedorModel {
     }
 
     //construtores
-    public FornecedorModel(int id, String nome_fantasia, String razao_social, String cnpj) {
+    public Fornecedor(int id, String nome_fantasia, String razao_social, String cnpj) {
         this.id = id;
         this.nome_fantasia = nome_fantasia;
         this.razao_social = razao_social;
         this.cnpj = cnpj;
     }
-    public FornecedorModel() {
+    public Fornecedor() {
     }
 
     

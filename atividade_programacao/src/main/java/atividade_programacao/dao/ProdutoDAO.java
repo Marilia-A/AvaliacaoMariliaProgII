@@ -5,12 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import atividade_programacao.model.CategoriaModel;
-import atividade_programacao.model.ProdutoModel;
+import atividade_programacao.model.Categoria;
+import atividade_programacao.model.Produto;
 
 public class ProdutoDAO {
 
-    public boolean salvar(ProdutoModel produto) {
+    public boolean salvar(Produto produto) {
         String sql = "INSERT INTO produto (id, nome, preco, qtd_estoque, categoria_id) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
@@ -29,7 +29,7 @@ public class ProdutoDAO {
         }
     }
 
-    public boolean alterar(ProdutoModel produto) {
+    public boolean alterar(Produto produto) {
         String sql = "UPDATE produto SET nome = ?, preco = ?, qtd_estoque = ?, categoria_id = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -62,7 +62,7 @@ public class ProdutoDAO {
         }
     }
 
-    public ProdutoModel pesquisar(int id) {
+    public Produto pesquisar(int id) {
         String sql = "SELECT p.id, p.nome, p.preco, p.qtd_estoque, c.id AS categoria_id, c.nome AS categoria_nome " +
                      "FROM produto p INNER JOIN categoria c ON p.categoria_id = c.id WHERE p.id = ?";
 
@@ -73,11 +73,11 @@ public class ProdutoDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    CategoriaModel categoria = new CategoriaModel();
+                    Categoria categoria = new Categoria();
                     categoria.setId(rs.getInt("categoria_id"));
                     categoria.setNome(rs.getString("categoria_nome"));
 
-                    ProdutoModel produto = new ProdutoModel();
+                    Produto produto = new Produto();
                     produto.setId(rs.getInt("id"));
                     produto.setNome(rs.getString("nome"));
                     produto.setPreco(rs.getDouble("preco"));

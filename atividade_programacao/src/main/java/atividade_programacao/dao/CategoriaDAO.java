@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import atividade_programacao.model.CategoriaModel;
+import atividade_programacao.model.Categoria;
 
 public class CategoriaDAO {
 
-    public boolean salvar(CategoriaModel categoria) {
+    public boolean salvar(Categoria categoria) {
         String sql = "INSERT INTO categoria (id, nome) VALUES (?, ?)";
 
         try (Connection con = Conexao.getConnection();
@@ -24,7 +24,7 @@ public class CategoriaDAO {
         }
     }
 
-    public boolean alterar(CategoriaModel categoria) {
+    public boolean alterar(Categoria categoria) {
         String sql = "UPDATE categoria SET nome = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -53,7 +53,7 @@ public class CategoriaDAO {
         }
     }
 
-    public CategoriaModel pesquisar(int id) {
+    public Categoria pesquisar(int id) {
         String sql = "SELECT id, nome FROM categoria WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -63,7 +63,7 @@ public class CategoriaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    CategoriaModel categoria = new CategoriaModel();
+                    Categoria categoria = new Categoria();
                     categoria.setId(rs.getInt("id"));
                     categoria.setNome(rs.getString("nome"));
                     return categoria;

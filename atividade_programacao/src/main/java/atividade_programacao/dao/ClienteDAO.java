@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import atividade_programacao.model.ClienteModel;
+import atividade_programacao.model.Cliente;
 
 public class ClienteDAO {
 
-    public boolean salvar(ClienteModel cliente) {
+    public boolean salvar(Cliente cliente) {
         String sql = "INSERT INTO cliente (id, nome, cpf, rg, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
@@ -29,7 +29,7 @@ public class ClienteDAO {
         }
     }
 
-    public boolean alterar(ClienteModel cliente) {
+    public boolean alterar(Cliente cliente) {
         String sql = "UPDATE cliente SET nome = ?, cpf = ?, rg = ?, endereco = ?, telefone = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -63,7 +63,7 @@ public class ClienteDAO {
         }
     }
 
-    public ClienteModel pesquisar(int id) {
+    public Cliente pesquisar(int id) {
         String sql = "SELECT id, nome, cpf, rg, endereco, telefone FROM cliente WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -73,7 +73,7 @@ public class ClienteDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    ClienteModel cliente = new ClienteModel();
+                    Cliente cliente = new Cliente();
                     cliente.setId(rs.getInt("id"));
                     cliente.setNome(rs.getString("nome"));
                     cliente.setCpf(rs.getString("cpf"));

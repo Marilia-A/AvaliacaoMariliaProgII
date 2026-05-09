@@ -5,13 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import atividade_programacao.model.ClienteModel;
-import atividade_programacao.model.ProdutoModel;
-import atividade_programacao.model.VendaModel;
+import atividade_programacao.model.Cliente;
+import atividade_programacao.model.Produto;
+import atividade_programacao.model.Venda;
 
 public class VendaDAO {
 
-    public boolean salvar(VendaModel venda) {
+    public boolean salvar(Venda venda) {
         String sqlVenda = "INSERT INTO venda (id, valor_total, data_venda, produto_id, cliente_id) VALUES (?, ?, ?, ?, ?)";
         String sqlEstoque = "UPDATE produto SET qtd_estoque = qtd_estoque - ? WHERE id = ? AND qtd_estoque >= ?";
         String sqlVerificaEstoque = "SELECT qtd_estoque FROM produto WHERE id = ?";
@@ -92,7 +92,7 @@ public class VendaDAO {
         return 0;
     }
 
-    public boolean alterar(VendaModel venda) {
+    public boolean alterar(Venda venda) {
         String sql = "UPDATE venda SET valor_total = ?, data_venda = ?, produto_id = ?, cliente_id = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -125,7 +125,7 @@ public class VendaDAO {
         }
     }
 
-    public VendaModel pesquisar(int id) {
+    public Venda pesquisar(int id) {
         String sql = "SELECT v.id, v.valor_total, v.data_venda, " +
                 "p.id AS produto_id, p.nome AS produto_nome, p.preco, p.qtd_estoque, " +
                 "c.id AS cliente_id, c.nome AS cliente_nome, c.cpf, c.rg, c.endereco, c.telefone " +
@@ -141,13 +141,13 @@ public class VendaDAO {
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    ProdutoModel produto = new ProdutoModel();
+                    Produto produto = new Produto();
                     produto.setId(rs.getInt("produto_id"));
                     produto.setNome(rs.getString("produto_nome"));
                     produto.setPreco(rs.getDouble("preco"));
                     produto.setQtd_estoque(rs.getDouble("qtd_estoque"));
 
-                    ClienteModel cliente = new ClienteModel();
+                    Cliente cliente = new Cliente();
                     cliente.setId(rs.getInt("cliente_id"));
                     cliente.setNome(rs.getString("cliente_nome"));
                     cliente.setCpf(rs.getString("cpf"));
@@ -155,7 +155,7 @@ public class VendaDAO {
                     cliente.setEndereco(rs.getString("endereco"));
                     cliente.setTelefone(rs.getString("telefone"));
 
-                    VendaModel venda = new VendaModel();
+                    Venda venda = new Venda();
                     venda.setId(rs.getInt("id"));
                     venda.setValor_total(rs.getDouble("valor_total"));
                     venda.setData_venda(rs.getDate("data_venda"));

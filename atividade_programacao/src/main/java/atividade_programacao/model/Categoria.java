@@ -1,6 +1,6 @@
 package atividade_programacao.model;
 
-public class CategoriaModel {
+public class Categoria {
     private int id;
     private String nome;
 
@@ -19,11 +19,11 @@ public class CategoriaModel {
     }
 
     //construtores
-    public CategoriaModel(int id, String nome) {
+    public Categoria(int id, String nome) {
         this.id = id;
         this.nome = nome;
     }
-    public CategoriaModel() {
+    public Categoria() {
     }
 
     
