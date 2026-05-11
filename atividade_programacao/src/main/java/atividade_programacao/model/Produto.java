@@ -1,15 +1,13 @@
 package atividade_programacao.model;
-
 public class Produto {
     private int id;
     private String nome;
-    private double preco;
-    private double qtd_estoque;
+    private double preco_medio;
+    private double qtde_estoque;
     private double valor_ultima_compra;
     private double valor_ultima_venda;
     private Fornecedor fornecedor;
     private Categoria categoria;
-
     public int getId() {
         return id;
     }
@@ -22,17 +20,17 @@ public class Produto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public double getPreco() {
-        return preco;
+    public double getPreco_medio() {
+        return preco_medio;
     }
-    public void setPreco(double preco) {
-        this.preco = preco;
+    public void setPreco_medio(double preco_medio) {
+        this.preco_medio = preco_medio;
     }
     public double getQtd_estoque() {
-        return qtd_estoque;
+        return qtde_estoque;
     }
     public void setQtd_estoque(double qtd_estoque) {
-        this.qtd_estoque = qtd_estoque;
+        this.qtde_estoque = qtd_estoque;
     }
     public double getValor_ultima_compra() {
         return valor_ultima_compra;
@@ -58,15 +56,14 @@ public class Produto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
-
     public Produto() {
     }
-    public Produto(int id, String nome, double preco, double qtd_estoque, double valor_ultima_compra,
+    public Produto(int id, String nome, double preco_medio, double qtde_estoque, double valor_ultima_compra,
             double valor_ultima_venda, Fornecedor fornecedor, Categoria categoria) {
         this.id = id;
         this.nome = nome;
-        this.preco = preco;
-        this.qtd_estoque = qtd_estoque;
+        this.preco_medio = preco_medio;
+        this.qtde_estoque = qtde_estoque;
         this.valor_ultima_compra = valor_ultima_compra;
         this.valor_ultima_venda = valor_ultima_venda;
         this.fornecedor = fornecedor;

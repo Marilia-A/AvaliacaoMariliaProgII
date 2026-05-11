@@ -12,16 +12,15 @@ import atividade_programacao.model.Produto;
 public class CompraProdutoDAO {
 
     public boolean salvar(CompraProduto cp) {
-        String sql = "INSERT INTO compra_produto (id_item, produto_id, compra_id, quantidade, preco_unitario) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO compra_produto (produto_id, compra_id, quantidade, preco_unit) VALUES (?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, cp.getId_item());
-            stmt.setInt(2, cp.getProduto().getId());
-            stmt.setInt(3, cp.getCompra().getId());
-            stmt.setInt(4, cp.getQuantidade());
-            stmt.setDouble(5, cp.getPreco_unitario());
+            stmt.setInt(1, cp.getProduto().getId());
+            stmt.setInt(2, cp.getCompra().getId());
+            stmt.setInt(3, cp.getQuantidade());
+            stmt.setDouble(4, cp.getPreco_unit());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -31,7 +30,7 @@ public class CompraProdutoDAO {
     }
 
     public boolean alterar(CompraProduto cp) {
-        String sql = "UPDATE compra_produto SET produto_id = ?, compra_id = ?, quantidade = ?, preco_unitario = ? WHERE id_item = ?";
+        String sql = "UPDATE compra_produto SET produto_id = ?, compra_id = ?, quantidade = ?, preco_unit = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -39,8 +38,8 @@ public class CompraProdutoDAO {
             stmt.setInt(1, cp.getProduto().getId());
             stmt.setInt(2, cp.getCompra().getId());
             stmt.setInt(3, cp.getQuantidade());
-            stmt.setDouble(4, cp.getPreco_unitario());
-            stmt.setInt(5, cp.getId_item());
+            stmt.setDouble(4, cp.getPreco_unit());
+            stmt.setInt(5, cp.getId());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -49,13 +48,13 @@ public class CompraProdutoDAO {
         }
     }
 
-    public boolean excluir(int id_item) {
-        String sql = "DELETE FROM compra_produto WHERE id_item = ?";
+    public boolean excluir(int id) {
+        String sql = "DELETE FROM compra_produto WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, id_item);
+            stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,27 +62,25 @@ public class CompraProdutoDAO {
         }
     }
 
-    public CompraProduto pesquisar(int id_item) {
-        String sql = "SELECT id_item, produto_id, compra_id, quantidade, preco_unitario FROM compra_produto WHERE id_item = ?";
+    public CompraProduto pesquisar(int id) {
+        String sql = "SELECT id, produto_id, compra_id, quantidade, preco_unit FROM compra_produto WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, id_item);
+            stmt.setInt(1, id);
 
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     CompraProduto cp = new CompraProduto();
-                    cp.setId_item(rs.getInt("id_item"));
+                    cp.setId(rs.getInt("id"));
                     cp.setQuantidade(rs.getInt("quantidade"));
-                    cp.setPreco_unitario(rs.getDouble("preco_unitario"));
+                    cp.setPreco_unit(rs.getDouble("preco_unit"));
                     
-                    // Populando Produto com ID
                     Produto p = new Produto();
                     p.setId(rs.getInt("produto_id"));
                     cp.setProduto(p);
                     
-                    // Populando Compra com ID
                     Compra c = new Compra();
                     c.setId(rs.getInt("compra_id"));
                     cp.setCompra(c);

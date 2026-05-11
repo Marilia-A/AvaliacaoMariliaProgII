@@ -1,12 +1,9 @@
 package atividade_programacao.model;
-
 public class Fornecedor {
     private int id;
     private String nome_fantasia;
     private String razao_social;
     private String cnpj;
-
-    //get e set
     public int getId() {
         return id;
     }
@@ -31,8 +28,6 @@ public class Fornecedor {
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-
-    //construtores
     public Fornecedor(int id, String nome_fantasia, String razao_social, String cnpj) {
         this.id = id;
         this.nome_fantasia = nome_fantasia;
@@ -41,8 +36,4 @@ public class Fornecedor {
     }
     public Fornecedor() {
     }
-
-    
-    
-    
 }

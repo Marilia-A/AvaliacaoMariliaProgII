@@ -12,16 +12,15 @@ import atividade_programacao.model.VendaProduto;
 public class VendaProdutoDAO {
 
     public boolean salvar(VendaProduto vp) {
-        String sql = "INSERT INTO venda_produto (id, quantidade, preco_unitario, venda_id, produto_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO venda_produto (quantidade, preco_unit, venda_id, produto_id) VALUES (?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, vp.getId());
-            stmt.setInt(2, vp.getQuantidade());
-            stmt.setDouble(3, vp.getPreco_unitario());
-            stmt.setInt(4, vp.getVenda().getId());
-            stmt.setInt(5, vp.getProduto().getId());
+            stmt.setInt(1, vp.getQuantidade());
+            stmt.setDouble(2, vp.getPreco_unitario());
+            stmt.setInt(3, vp.getVenda().getId());
+            stmt.setInt(4, vp.getProduto().getId());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -31,7 +30,7 @@ public class VendaProdutoDAO {
     }
 
     public boolean alterar(VendaProduto vp) {
-        String sql = "UPDATE venda_produto SET quantidade = ?, preco_unitario = ?, venda_id = ?, produto_id = ? WHERE id = ?";
+        String sql = "UPDATE venda_produto SET quantidade = ?, preco_unit = ?, venda_id = ?, produto_id = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -64,7 +63,7 @@ public class VendaProdutoDAO {
     }
 
     public VendaProduto pesquisar(int id) {
-        String sql = "SELECT id, quantidade, preco_unitario, venda_id, produto_id FROM venda_produto WHERE id = ?";
+        String sql = "SELECT id, quantidade, preco_unit, venda_id, produto_id FROM venda_produto WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -76,14 +75,12 @@ public class VendaProdutoDAO {
                     VendaProduto vp = new VendaProduto();
                     vp.setId(rs.getInt("id"));
                     vp.setQuantidade(rs.getInt("quantidade"));
-                    vp.setPreco_unitario(rs.getDouble("preco_unitario"));
+                    vp.setPreco_unitario(rs.getDouble("preco_unit"));
                     
-                    // Populando Venda com ID (Objeto raso)
                     Venda v = new Venda();
                     v.setId(rs.getInt("venda_id"));
                     vp.setVenda(v);
                     
-                    // Populando Produto com ID (Objeto raso)
                     Produto p = new Produto();
                     p.setId(rs.getInt("produto_id"));
                     vp.setProduto(p);

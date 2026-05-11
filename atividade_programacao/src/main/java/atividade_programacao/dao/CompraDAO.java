@@ -12,16 +12,13 @@ import atividade_programacao.model.Fornecedor;
 public class CompraDAO {
 
     public boolean salvar(Compra compra) {
-        String sql = "INSERT INTO compra (id, data_compra, valor_total, fornecedor_id) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO compra (data_compra, valor_total, fornecedor_id) VALUES (?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
-
-            stmt.setInt(1, compra.getId());
-            // Converte LocalDate para java.sql.Date
-            stmt.setDate(2, Date.valueOf(compra.getData_compra()));
-            stmt.setDouble(3, compra.getValor_total());
-            stmt.setInt(4, compra.getFornecedor().getId());
+            stmt.setDate(1, Date.valueOf(compra.getData_compra()));
+            stmt.setDouble(2, compra.getValor_total());
+            stmt.setInt(3, compra.getFornecedor().getId());
             
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -74,11 +71,10 @@ public class CompraDAO {
                 if (rs.next()) {
                     Compra compra = new Compra();
                     compra.setId(rs.getInt("id"));
-                    // Converte java.sql.Date de volta para LocalDate
                     compra.setData_compra(rs.getDate("data_compra").toLocalDate());
                     compra.setValor_total(rs.getDouble("valor_total"));
                     
-                    // Cria um fornecedor "raso" apenas com o ID para preencher o objeto
+                    
                     Fornecedor f = new Fornecedor();
                     f.setId(rs.getInt("fornecedor_id"));
                     compra.setFornecedor(f);

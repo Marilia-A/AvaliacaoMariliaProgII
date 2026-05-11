@@ -10,17 +10,16 @@ import atividade_programacao.model.Cliente;
 public class ClienteDAO {
 
     public boolean salvar(Cliente cliente) {
-        String sql = "INSERT INTO cliente (id, nome, cpf, rg, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO cliente (nome, cpf, rg, endereco, telefone) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, cliente.getId());
-            stmt.setString(2, cliente.getNome());
-            stmt.setString(3, cliente.getCpf());
-            stmt.setString(4, cliente.getRg());
-            stmt.setString(5, cliente.getEndereco());
-            stmt.setString(6, cliente.getTelefone());
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getCpf());
+            stmt.setString(3, cliente.getRg());
+            stmt.setString(4, cliente.getEndereco());
+            stmt.setString(5, cliente.getTelefone());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

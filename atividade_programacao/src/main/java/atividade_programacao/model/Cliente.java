@@ -1,5 +1,4 @@
 package atividade_programacao.model;
-
 public class Cliente {
     private int id; 
     private String nome;
@@ -7,8 +6,6 @@ public class Cliente {
     private String rg;
     private String endereco;
     private String telefone;
-
-    //get e set
     public int getId() {
         return id;
     }
@@ -45,8 +42,6 @@ public class Cliente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    //construtores
     public Cliente() {
     }
     public Cliente(int id, String nome, String cpf, String rg, String endereco, String telefone) {
@@ -57,6 +52,4 @@ public class Cliente {
         this.endereco = endereco;
         this.telefone = telefone;
     }
-
-    
 }

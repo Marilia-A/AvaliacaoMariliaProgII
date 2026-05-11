@@ -1,5 +1,4 @@
 package atividade_programacao.model;
-
 public class VendaProduto {
     private int id;
     private int quantidade;
@@ -46,6 +45,5 @@ public class VendaProduto {
         this.preco_unitario = preco_unitario;
         this.venda = venda;
         this.produto = produto;
-    }
-        
+    }     
 }

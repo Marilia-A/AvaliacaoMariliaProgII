@@ -1,17 +1,15 @@
 package atividade_programacao.model;
-
 public class CompraProduto {
-    private int id_item;
+    private int id;
     private Produto produto;
     private Compra compra;
     private int quantidade;
-    private double preco_unitario;
-    
-    public int getId_item() {
-        return id_item;
+    private double preco_unit;
+    public int getId() {
+        return id;
     }
-    public void setId_item(int id_item) {
-        this.id_item = id_item;
+    public void setId(int id) {
+        this.id = id;
     }
     public Produto getProduto() {
         return produto;
@@ -31,22 +29,19 @@ public class CompraProduto {
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
-    public double getPreco_unitario() {
-        return preco_unitario;
+    public double getPreco_unit() {
+        return preco_unit;
     }
-    public void setPreco_unitario(double preco_unitario) {
-        this.preco_unitario = preco_unitario;
+    public void setPreco_unit(double preco_unit) {
+        this.preco_unit = preco_unit;
     }
-
     public CompraProduto() {
     }
-    public CompraProduto(int id_item, Produto produto, Compra compra, int quantidade, double preco_unitario) {
-        this.id_item = id_item;
+    public CompraProduto(int id, Produto produto, Compra compra, int quantidade, double preco_unit) {
+        this.id = id;
         this.produto = produto;
         this.compra = compra;
         this.quantidade = quantidade;
-        this.preco_unitario = preco_unitario;
+        this.preco_unit = preco_unit;
     }
-    
-
 }

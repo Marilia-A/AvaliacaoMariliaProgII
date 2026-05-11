@@ -1,30 +1,21 @@
 package atividade_programacao.controller;
 
 import atividade_programacao.dao.ClienteDAO;
-import atividade_programacao.dao.ProdutoDAO;
 import atividade_programacao.dao.VendaDAO;
 import atividade_programacao.model.Cliente;
-import atividade_programacao.model.Produto;
 import atividade_programacao.model.Venda;
 
 public class VendaController {
     private VendaDAO vendaDAO;
-    private ProdutoDAO produtoDAO;
     private ClienteDAO clienteDAO;
 
     public VendaController() {
         this.vendaDAO = new VendaDAO();
-        this.produtoDAO = new ProdutoDAO();
         this.clienteDAO = new ClienteDAO();
     }
 
     public boolean salvar(Venda venda) {
-        if (venda == null || venda.getProduto() == null || venda.getCliente() == null) {
-            return false;
-        }
-
-        Produto produtoBanco = produtoDAO.pesquisar(venda.getProduto().getId());
-        if (produtoBanco == null || produtoBanco.getQtd_estoque() < 1) {
+        if (venda == null || venda.getCliente() == null) {
             return false;
         }
 

@@ -1,10 +1,8 @@
 package atividade_programacao.model;
-
 public class ProdutoFornecedor {
     private int id;
     private Fornecedor fornecedor;
     private Produto produto;
-    
     public int getId() {
         return id;
     }
@@ -23,7 +21,6 @@ public class ProdutoFornecedor {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
-
     public ProdutoFornecedor() {
     }
     public ProdutoFornecedor(int id, Fornecedor fornecedor, Produto produto) {

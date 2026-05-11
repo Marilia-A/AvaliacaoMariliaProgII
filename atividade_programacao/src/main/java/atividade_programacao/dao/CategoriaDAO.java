@@ -10,13 +10,12 @@ import atividade_programacao.model.Categoria;
 public class CategoriaDAO {
 
     public boolean salvar(Categoria categoria) {
-        String sql = "INSERT INTO categoria (id, nome) VALUES (?, ?)";
+        String sql = "INSERT INTO categoria (nome) VALUES (?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, categoria.getId());
-            stmt.setString(2, categoria.getNome());
+            stmt.setString(1, categoria.getNome());
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
             e.printStackTrace();

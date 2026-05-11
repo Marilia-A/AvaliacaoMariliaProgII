@@ -10,15 +10,14 @@ import atividade_programacao.model.Fornecedor;
 public class FornecedorDAO {
 
     public boolean salvar(Fornecedor fornecedor) {
-        String sql = "INSERT INTO fornecedor (id, nome_fantasia, razao_social, cnpj) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO fornecedor (nome_fantasia, razao_social, cnpj) VALUES (?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, fornecedor.getId());
-            stmt.setString(2, fornecedor.getNome_fantasia());
-            stmt.setString(3, fornecedor.getRazao_social());
-            stmt.setString(4, fornecedor.getCnpj());
+            stmt.setString(1, fornecedor.getNome_fantasia());
+            stmt.setString(2, fornecedor.getRazao_social());
+            stmt.setString(3, fornecedor.getCnpj());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {

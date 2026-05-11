@@ -11,16 +11,17 @@ import atividade_programacao.model.Produto;
 public class ProdutoDAO {
 
     public boolean salvar(Produto produto) {
-        String sql = "INSERT INTO produto (id, nome, preco, qtd_estoque, categoria_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO produto (nome, preco_medio, qtde_estoque, valor_ultima_compra, valor_ultima_venda, categoria_id) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setInt(1, produto.getId());
-            stmt.setString(2, produto.getNome());
-            stmt.setDouble(3, produto.getPreco());
-            stmt.setDouble(4, produto.getQtd_estoque());
-            stmt.setInt(5, produto.getCategoria().getId());
+            stmt.setString(1, produto.getNome());
+            stmt.setDouble(2, produto.getPreco_medio());
+            stmt.setDouble(3, produto.getQtd_estoque());
+            stmt.setDouble(4, produto.getValor_ultima_compra());
+            stmt.setDouble(5, produto.getValor_ultima_venda());
+            stmt.setInt(6, produto.getCategoria().getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -30,16 +31,18 @@ public class ProdutoDAO {
     }
 
     public boolean alterar(Produto produto) {
-        String sql = "UPDATE produto SET nome = ?, preco = ?, qtd_estoque = ?, categoria_id = ? WHERE id = ?";
+        String sql = "UPDATE produto SET nome = ?, preco_medio = ?, qtde_estoque = ?, valor_ultima_compra = ?, valor_ultima_venda = ?, categoria_id = ? WHERE id = ?";
 
         try (Connection con = Conexao.getConnection();
              PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setString(1, produto.getNome());
-            stmt.setDouble(2, produto.getPreco());
+            stmt.setDouble(2, produto.getPreco_medio());
             stmt.setDouble(3, produto.getQtd_estoque());
-            stmt.setInt(4, produto.getCategoria().getId());
-            stmt.setInt(5, produto.getId());
+            stmt.setDouble(4, produto.getValor_ultima_compra());
+            stmt.setDouble(5, produto.getValor_ultima_venda());
+            stmt.setInt(6, produto.getCategoria().getId());
+            stmt.setInt(7, produto.getId());
 
             return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -63,7 +66,7 @@ public class ProdutoDAO {
     }
 
     public Produto pesquisar(int id) {
-        String sql = "SELECT p.id, p.nome, p.preco, p.qtd_estoque, c.id AS categoria_id, c.nome AS categoria_nome " +
+        String sql = "SELECT p.id, p.nome, p.preco_medio, p.qtde_estoque, p.valor_ultima_compra, p.valor_ultima_venda, c.id AS categoria_id, c.nome AS categoria_nome " +
                      "FROM produto p INNER JOIN categoria c ON p.categoria_id = c.id WHERE p.id = ?";
 
         try (Connection con = Conexao.getConnection();
@@ -80,8 +83,10 @@ public class ProdutoDAO {
                     Produto produto = new Produto();
                     produto.setId(rs.getInt("id"));
                     produto.setNome(rs.getString("nome"));
-                    produto.setPreco(rs.getDouble("preco"));
-                    produto.setQtd_estoque(rs.getDouble("qtd_estoque"));
+                    produto.setPreco_medio(rs.getDouble("preco_medio"));
+                    produto.setQtd_estoque(rs.getDouble("qtde_estoque"));
+                    produto.setValor_ultima_compra(rs.getDouble("valor_ultima_compra"));
+                    produto.setValor_ultima_venda(rs.getDouble("valor_ultima_venda"));
                     produto.setCategoria(categoria);
                     return produto;
                 }
