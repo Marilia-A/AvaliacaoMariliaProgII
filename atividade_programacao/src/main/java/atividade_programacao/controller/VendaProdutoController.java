@@ -16,7 +16,7 @@ public class VendaProdutoController {
 
     public boolean salvar(VendaProduto vendaProduto) {
         Produto produto = produtoDAO.pesquisar(vendaProduto.getProduto().getId());
-
+        // não da pra realizar venda se não tiver produto no estoque
         if (produto == null || produto.getQtd_estoque() < vendaProduto.getQuantidade()) {
             return false;
         }
@@ -24,8 +24,11 @@ public class VendaProdutoController {
         boolean salvou = vendaProdutoDAO.salvar(vendaProduto);
 
         if (salvou) {
+            // atualiza estoque
             produto.setQtd_estoque(produto.getQtd_estoque() - vendaProduto.getQuantidade());
+            // atualiza valor da ultima venda
             produto.setValor_ultima_venda(vendaProduto.getPreco_unitario());
+            // salva e altera
             produtoDAO.alterar(produto);
         }
 

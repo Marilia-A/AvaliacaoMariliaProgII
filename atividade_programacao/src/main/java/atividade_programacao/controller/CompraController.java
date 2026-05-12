@@ -21,11 +21,13 @@ public class CompraController {
         if (salvou) {
             for (CompraProduto cp : compra.getProdutos()) {
                 Produto produto = produtoDAO.pesquisar(cp.getProduto().getId());
-
+                // atualiza estoque dps de compra
                 produto.setQtd_estoque(produto.getQtd_estoque() + cp.getQuantidade());
+                //valor da ultima compra atualizado
                 produto.setValor_ultima_compra(cp.getPreco_unit());
+                // preço medio é calculado denovo
                 produto.setPreco_medio((produto.getPreco_medio() + cp.getPreco_unit()) / 2);
-
+                // por fim altera e salva
                 produtoDAO.alterar(produto);
             }
         }

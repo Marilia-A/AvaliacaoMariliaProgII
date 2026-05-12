@@ -21,9 +21,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // =========================
         // CONTROLLERS
-        // =========================
         CategoriaController categoriaController = new CategoriaController();
         ClienteController clienteController = new ClienteController();
         FornecedorController fornecedorController = new FornecedorController();
@@ -31,18 +29,16 @@ public class Main {
         CompraController compraController = new CompraController();
         VendaController vendaController = new VendaController();
 
-        // =========================
+        
         // CATEGORIA
-        // =========================
         Categoria categoria1 = new Categoria();
         categoria1.setId(1);
         categoria1.setNome("Bebidas");
 
         System.out.println("Categoria: " + categoriaController.salvar(categoria1));
 
-        // =========================
         // CLIENTE
-        // =========================
+        
         Cliente cliente1 = new Cliente();
         cliente1.setId(1);
         cliente1.setNome("Maria Silva");
@@ -53,9 +49,8 @@ public class Main {
 
         System.out.println("Cliente: " + clienteController.salvar(cliente1));
 
-        // =========================
+       
         // FORNECEDOR
-        // =========================
         Fornecedor fornecedor1 = new Fornecedor();
         fornecedor1.setId(1);
         fornecedor1.setNome_fantasia("Distribuidora Alfa");
@@ -64,9 +59,8 @@ public class Main {
 
         System.out.println("Fornecedor: " + fornecedorController.salvar(fornecedor1));
 
-        // =========================
+        
         // PRODUTOS
-        // =========================
         Produto produto1 = new Produto();
         produto1.setId(1);
         produto1.setNome("Coca-Cola 2L");
@@ -89,9 +83,8 @@ public class Main {
 
         System.out.println("Produto2: " + produtoController.salvar(produto2));
 
-        // =========================
+        
         // COMPRA 1
-        // =========================
         Compra compra1 = new Compra();
         compra1.setId(1);
         compra1.setData_compra(LocalDate.now());
@@ -113,9 +106,8 @@ public class Main {
 
         System.out.println("Compra1: " + compraController.salvar(compra1));
 
-        // =========================
+        
         // COMPRA 2
-        // =========================
         Compra compra2 = new Compra();
         compra2.setId(2);
         compra2.setData_compra(LocalDate.now());
@@ -137,9 +129,7 @@ public class Main {
 
         System.out.println("Compra2: " + compraController.salvar(compra2));
 
-        // =========================
         // VENDA 1
-        // =========================
         Venda venda1 = new Venda();
         venda1.setId(1);
         venda1.setData_venda(LocalDate.now());
@@ -161,9 +151,8 @@ public class Main {
 
         System.out.println("Venda1: " + vendaController.salvar(venda1));
 
-        // =========================
+
         // VENDA 2
-        // =========================
         Venda venda2 = new Venda();
         venda2.setId(2);
         venda2.setData_venda(LocalDate.now());

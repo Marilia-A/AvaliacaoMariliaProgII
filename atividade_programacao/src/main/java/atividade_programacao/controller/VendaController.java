@@ -13,22 +13,22 @@ public class VendaController {
         this.vendaDAO = new VendaDAO();
         this.clienteDAO = new ClienteDAO();
     }
-
+    // venda precisa ter cliente 
     public boolean salvar(Venda venda) {
         if (venda == null || venda.getCliente() == null) {
             return false;
         }
-
+        // cliente deve existir no banco de dados
         Cliente clienteBanco = clienteDAO.pesquisar(venda.getCliente().getId());
         if (clienteBanco == null) {
             return false;
         }
-
+       // limite de 3 vendas
         int totalVendas = vendaDAO.contarVendasPorCliente(clienteBanco.getId());
         if (totalVendas >= 3) {
             return false;
         }
-
+        // só deve salvar se os ifs forem atendidos em essencia
         return vendaDAO.salvar(venda);
     }
 
@@ -43,7 +43,7 @@ public class VendaController {
     public Venda pesquisar(int id) {
         return vendaDAO.pesquisar(id);
     }
-
+    // conta as vendas por cliente
     public int contarVendasPorCliente(int clienteId) {
         return vendaDAO.contarVendasPorCliente(clienteId);
     }
