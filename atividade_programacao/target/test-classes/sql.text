@@ -1,0 +1,41 @@
+Abrir sessão sql e testar os inserts:
+
+INSERT INTO categoria (id, nome) VALUES
+(1, 'Bebidas'),
+(2, 'Alimentos'),
+(3, 'Limpeza');
+
+INSERT INTO cliente (id, nome, cpf, rg, endereco, telefone) VALUES
+(1, 'Maria Silva', '123.456.789-00', 'MG123456', 'Rua A, 100', '62999990001'),
+(2, 'João Souza', '987.654.321-00', 'GO654321', 'Rua B, 200', '62999990002');
+
+INSERT INTO fornecedor (id, nome_fantasia, razao_social, cnpj) VALUES
+(1, 'Distribuidora Alfa', 'Alfa Comercio LTDA', '12.345.678/0001-90'),
+(2, 'Atacado Beta', 'Beta Distribuicao LTDA', '98.765.432/0001-11');
+
+INSERT INTO produto (id, nome, preco_medio, qtde_estoque, valor_ultima_compra, valor_ultima_venda, categoria_id) VALUES
+(1, 'Coca-Cola 2L', 8.50, 50, 7.00, 9.00, 1),
+(2, 'Arroz 5kg', 22.00, 30, 20.00, 25.00, 2),
+(3, 'Detergente', 3.50, 100, 3.00, 4.00, 3);
+
+INSERT INTO produto_fornecedor (id, produto_id, fornecedor_id) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 1);
+
+INSERT INTO compra (id, data_compra, valor_total, fornecedor_id) VALUES
+(1, '2026-05-11', 100.00, 1),
+(2, '2026-05-11', 200.00, 2);
+
+INSERT INTO compra_produto (id, compra_id, produto_id, quantidade, preco_unit) VALUES
+(1, 1, 1, 10, 7.00),
+(2, 1, 3, 20, 3.00),
+(3, 2, 2, 10, 20.00);
+
+INSERT INTO venda (id, data_venda, valor_total, cliente_id) VALUES
+(1, '2026-05-11', 18.00, 1),
+(2, '2026-05-11', 25.00, 2);
+
+INSERT INTO venda_produto (id, venda_id, produto_id, quantidade, preco_unit) VALUES
+(1, 1, 1, 2, 9.00),
+(2, 2, 2, 1, 25.00);

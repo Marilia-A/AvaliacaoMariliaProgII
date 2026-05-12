@@ -1,320 +1,188 @@
 import java.time.LocalDate;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 import atividade_programacao.controller.CategoriaController;
 import atividade_programacao.controller.ClienteController;
+import atividade_programacao.controller.CompraController;
 import atividade_programacao.controller.FornecedorController;
 import atividade_programacao.controller.ProdutoController;
 import atividade_programacao.controller.VendaController;
 import atividade_programacao.model.Categoria;
 import atividade_programacao.model.Cliente;
+import atividade_programacao.model.Compra;
+import atividade_programacao.model.CompraProduto;
 import atividade_programacao.model.Fornecedor;
 import atividade_programacao.model.Produto;
 import atividade_programacao.model.Venda;
+import atividade_programacao.model.VendaProduto;
 
 public class Main {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
 
+        // =========================
+        // CONTROLLERS
+        // =========================
         CategoriaController categoriaController = new CategoriaController();
         ClienteController clienteController = new ClienteController();
         FornecedorController fornecedorController = new FornecedorController();
         ProdutoController produtoController = new ProdutoController();
+        CompraController compraController = new CompraController();
         VendaController vendaController = new VendaController();
 
-        int opcaoPrincipal;
+        // =========================
+        // CATEGORIA
+        // =========================
+        Categoria categoria1 = new Categoria();
+        categoria1.setId(1);
+        categoria1.setNome("Bebidas");
 
-        do {
-            System.out.println("\n=== MENU PRINCIPAL ===");
-            System.out.println("1 - Gerenciar Categorias");
-            System.out.println("2 - Gerenciar Clientes");
-            System.out.println("3 - Gerenciar Fornecedores");
-            System.out.println("4 - Gerenciar Produtos");
-            System.out.println("5 - Vendas");
-            System.out.println("0 - Sair");
-            System.out.print("Opção: ");
-            opcaoPrincipal = Integer.parseInt(sc.nextLine());
+        System.out.println("Categoria: " + categoriaController.salvar(categoria1));
 
-            int opcaoSub;
+        // =========================
+        // CLIENTE
+        // =========================
+        Cliente cliente1 = new Cliente();
+        cliente1.setId(1);
+        cliente1.setNome("Maria Silva");
+        cliente1.setCpf("123.456.789-00");
+        cliente1.setRg("MG123456");
+        cliente1.setEndereco("Rua A");
+        cliente1.setTelefone("62999990001");
 
-            switch (opcaoPrincipal) {
-                case 1 -> {
-                    do {
-                        System.out.println("\n--- SUBMENU CATEGORIAS ---");
-                        System.out.println("1 - Cadastrar | 2 - Alterar | 3 - Excluir | 4 - Pesquisar | 0 - Voltar");
-                        System.out.print("Ação: ");
-                        opcaoSub = Integer.parseInt(sc.nextLine());
-                        switch (opcaoSub) {
-                            case 1 -> {
-                                Categoria categoria = new Categoria();
-                                System.out.print("ID da categoria: ");
-                                categoria.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome da categoria: ");
-                                categoria.setNome(sc.nextLine());
-                                System.out.println(categoriaController.salvar(categoria) ? "Categoria salva." : "Erro ao salvar.");
-                            }
-                            case 2 -> {
-                                Categoria categoria = new Categoria();
-                                System.out.print("ID da categoria: ");
-                                categoria.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome da categoria: ");
-                                categoria.setNome(sc.nextLine());
-                                System.out.println(categoriaController.alterar(categoria) ? "Categoria alterada." : "Erro ao alterar.");
-                            }
-                            case 3 -> {
-                                System.out.print("ID da categoria: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                System.out.println(categoriaController.excluir(id) ? "Categoria excluida." : "Erro ao excluir.");
-                            }
-                            case 4 -> {
-                                System.out.print("ID da categoria: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                Categoria categoria = categoriaController.pesquisar(id);
-                                if (categoria != null) {
-                                    System.out.println("ID: " + categoria.getId() + " | Nome: " + categoria.getNome());
-                                } else {
-                                    System.out.println("Categoria nao encontrada.");
-                                }
-                            }
-                        }
-                    } while (opcaoSub != 0);
-                }
+        System.out.println("Cliente: " + clienteController.salvar(cliente1));
 
-                case 2 -> {
-                    do {
-                        System.out.println("\n--- SUBMENU CLIENTES ---");
-                        System.out.println("1 - Cadastrar | 2 - Alterar | 3 - Excluir | 4 - Pesquisar | 0 - Voltar");
-                        System.out.print("Ação: ");
-                        opcaoSub = Integer.parseInt(sc.nextLine());
-                        switch (opcaoSub) {
-                            case 1 -> {
-                                Cliente cliente = new Cliente();
-                                System.out.print("ID do cliente: ");
-                                cliente.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome: ");
-                                cliente.setNome(sc.nextLine());
-                                System.out.print("CPF: ");
-                                cliente.setCpf(sc.nextLine());
-                                System.out.print("RG: ");
-                                cliente.setRg(sc.nextLine());
-                                System.out.print("Endereco: ");
-                                cliente.setEndereco(sc.nextLine());
-                                System.out.print("Telefone: ");
-                                cliente.setTelefone(sc.nextLine());
-                                System.out.println(clienteController.salvar(cliente) ? "Cliente salvo." : "Erro ao salvar.");
-                            }
-                            case 2 -> {
-                                Cliente cliente = new Cliente();
-                                System.out.print("ID do cliente: ");
-                                cliente.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome: ");
-                                cliente.setNome(sc.nextLine());
-                                System.out.print("CPF: ");
-                                cliente.setCpf(sc.nextLine());
-                                System.out.print("RG: ");
-                                cliente.setRg(sc.nextLine());
-                                System.out.print("Endereco: ");
-                                cliente.setEndereco(sc.nextLine());
-                                System.out.print("Telefone: ");
-                                cliente.setTelefone(sc.nextLine());
-                                System.out.println(clienteController.alterar(cliente) ? "Cliente alterado." : "Erro ao alterar.");
-                            }
-                            case 3 -> {
-                                System.out.print("ID do cliente: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                System.out.println(clienteController.excluir(id) ? "Cliente excluido." : "Erro ao excluir.");
-                            }
-                            case 4 -> {
-                                System.out.print("ID do cliente: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                Cliente cliente = clienteController.pesquisar(id);
-                                if (cliente != null) {
-                                    System.out.println("ID: " + cliente.getId() + " | Nome: " + cliente.getNome() + " | CPF: " + cliente.getCpf());
-                                } else {
-                                    System.out.println("Cliente nao encontrado.");
-                                }
-                            }
-                        }
-                    } while (opcaoSub != 0);
-                }
+        // =========================
+        // FORNECEDOR
+        // =========================
+        Fornecedor fornecedor1 = new Fornecedor();
+        fornecedor1.setId(1);
+        fornecedor1.setNome_fantasia("Distribuidora Alfa");
+        fornecedor1.setRazao_social("Alfa Comercio LTDA");
+        fornecedor1.setCnpj("12.345.678/0001-90");
 
-                case 3 -> {
-                    do {
-                        System.out.println("\n--- SUBMENU FORNECEDORES ---");
-                        System.out.println("1 - Cadastrar | 2 - Alterar | 3 - Excluir | 4 - Pesquisar | 0 - Voltar");
-                        System.out.print("Ação: ");
-                        opcaoSub = Integer.parseInt(sc.nextLine());
-                        switch (opcaoSub) {
-                            case 1 -> {
-                                Fornecedor fornecedor = new Fornecedor();
-                                System.out.print("ID do fornecedor: ");
-                                fornecedor.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome fantasia: ");
-                                fornecedor.setNome_fantasia(sc.nextLine());
-                                System.out.print("Razao social: ");
-                                fornecedor.setRazao_social(sc.nextLine());
-                                System.out.print("CNPJ: ");
-                                fornecedor.setCnpj(sc.nextLine());
-                                System.out.println(fornecedorController.salvar(fornecedor) ? "Fornecedor salvo." : "Erro ao salvar.");
-                            }
-                            case 2 -> {
-                                Fornecedor fornecedor = new Fornecedor();
-                                System.out.print("ID do fornecedor: ");
-                                fornecedor.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome fantasia: ");
-                                fornecedor.setNome_fantasia(sc.nextLine());
-                                System.out.print("Razao social: ");
-                                fornecedor.setRazao_social(sc.nextLine());
-                                System.out.print("CNPJ: ");
-                                fornecedor.setCnpj(sc.nextLine());
-                                System.out.println(fornecedorController.alterar(fornecedor) ? "Fornecedor alterado." : "Erro ao alterar.");
-                            }
-                            case 3 -> {
-                                System.out.print("ID do fornecedor: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                System.out.println(fornecedorController.excluir(id) ? "Fornecedor excluido." : "Erro ao excluir.");
-                            }
-                            case 4 -> {
-                                System.out.print("ID do fornecedor: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                Fornecedor fornecedor = fornecedorController.pesquisar(id);
-                                if (fornecedor != null) {
-                                    System.out.println("ID: " + fornecedor.getId() + " | Fantasia: " + fornecedor.getNome_fantasia());
-                                } else {
-                                    System.out.println("Fornecedor nao encontrado.");
-                                }
-                            }
-                        }
-                    } while (opcaoSub != 0);
-                }
+        System.out.println("Fornecedor: " + fornecedorController.salvar(fornecedor1));
 
-                case 4 -> {
-                    do {
-                        System.out.println("\n--- SUBMENU PRODUTOS ---");
-                        System.out.println("1 - Cadastrar | 2 - Alterar | 3 - Excluir | 4 - Pesquisar | 0 - Voltar");
-                        System.out.print("Ação: ");
-                        opcaoSub = Integer.parseInt(sc.nextLine());
-                        switch (opcaoSub) {
-                            case 1 -> {
-                                Produto produto = new Produto();
-                                Categoria categoria = new Categoria();
-                                System.out.print("ID do produto: ");
-                                produto.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome do produto: ");
-                                produto.setNome(sc.nextLine());
-                                System.out.print("Preco medio: ");
-                                produto.setPreco_medio(Double.parseDouble(sc.nextLine()));
-                                System.out.print("Quantidade em estoque: ");
-                                produto.setQtd_estoque(Double.parseDouble(sc.nextLine()));
-                                System.out.print("ID da categoria: ");
-                                categoria.setId(Integer.parseInt(sc.nextLine()));
-                                produto.setCategoria(categoria);
-                                System.out.println(produtoController.salvar(produto) ? "Produto salvo." : "Erro ao salvar.");
-                            }
-                            case 2 -> {
-                                Produto produto = new Produto();
-                                Categoria categoria = new Categoria();
-                                System.out.print("ID do produto: ");
-                                produto.setId(Integer.parseInt(sc.nextLine()));
-                                System.out.print("Nome do produto: ");
-                                produto.setNome(sc.nextLine());
-                                System.out.print("Preco medio: ");
-                                produto.setPreco_medio(Double.parseDouble(sc.nextLine()));
-                                System.out.print("Quantidade em estoque: ");
-                                produto.setQtd_estoque(Double.parseDouble(sc.nextLine()));
-                                System.out.print("ID da categoria: ");
-                                categoria.setId(Integer.parseInt(sc.nextLine()));
-                                produto.setCategoria(categoria);
-                                System.out.println(produtoController.alterar(produto) ? "Produto alterado." : "Erro ao alterar.");
-                            }
-                            case 3 -> {
-                                System.out.print("ID do produto: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                System.out.println(produtoController.excluir(id) ? "Produto excluido." : "Erro ao excluir.");
-                            }
-                            case 4 -> {
-                                System.out.print("ID do produto: ");
-                                int id = Integer.parseInt(sc.nextLine());
-                                Produto produto = produtoController.pesquisar(id);
-                                if (produto != null) {
-                                    System.out.println("ID: " + produto.getId() + " | Nome: " + produto.getNome() + " | Estoque: " + produto.getQtd_estoque());
-                                } else {
-                                    System.out.println("Produto nao encontrado.");
-                                }
-                            }
-                        }
-                    } while (opcaoSub != 0);
-                }
+        // =========================
+        // PRODUTOS
+        // =========================
+        Produto produto1 = new Produto();
+        produto1.setId(1);
+        produto1.setNome("Coca-Cola 2L");
+        produto1.setPreco_medio(8.50);
+        produto1.setQtd_estoque(50);
+        produto1.setValor_ultima_compra(7.00);
+        produto1.setValor_ultima_venda(9.00);
+        produto1.setCategoria(categoria1);
 
-                case 5 -> {
-                    do {
-                        System.out.println("\n--- SUBMENU VENDAS ---");
-                        System.out.println("1 - Realizar Venda | 2 - Pesquisar Venda | 0 - Voltar");
-                        System.out.print("Ação: ");
-                        opcaoSub = Integer.parseInt(sc.nextLine());
+        System.out.println("Produto1: " + produtoController.salvar(produto1));
 
-                        if (opcaoSub == 1) {
-                            Venda venda = new Venda();
-                            Cliente cliente = new Cliente();
-                            Produto produto = new Produto();
+        Produto produto2 = new Produto();
+        produto2.setId(2);
+        produto2.setNome("Arroz 5kg");
+        produto2.setPreco_medio(22.00);
+        produto2.setQtd_estoque(30);
+        produto2.setValor_ultima_compra(20.00);
+        produto2.setValor_ultima_venda(25.00);
+        produto2.setCategoria(categoria1);
 
-                            System.out.print("ID da venda: ");
-                            venda.setId(Integer.parseInt(sc.nextLine()));
+        System.out.println("Produto2: " + produtoController.salvar(produto2));
 
-                            System.out.print("ID do cliente: ");
-                            cliente.setId(Integer.parseInt(sc.nextLine()));
+        // =========================
+        // COMPRA 1
+        // =========================
+        Compra compra1 = new Compra();
+        compra1.setId(1);
+        compra1.setData_compra(LocalDate.now());
+        compra1.setValor_total(100.00);
+        compra1.setFornecedor(fornecedor1);
 
-                            System.out.print("ID do produto: ");
-                            produto.setId(Integer.parseInt(sc.nextLine()));
+        List<CompraProduto> listaCompra1 = new ArrayList<>();
 
-                            Cliente clienteBanco = clienteController.pesquisar(cliente.getId());
-                            Produto produtoBanco = produtoController.pesquisar(produto.getId());
+        CompraProduto cp1 = new CompraProduto();
+        cp1.setId(1);
+        cp1.setProduto(produto1);
+        cp1.setCompra(compra1);
+        cp1.setQuantidade(10);
+        cp1.setPreco_unit(7.00);
 
-                            if (clienteBanco == null || produtoBanco == null) {
-                                System.out.println("Erro: Cliente ou Produto nao encontrados.");
-                                continue;
-                            }
+        listaCompra1.add(cp1);
 
-                            if (produtoBanco.getQtd_estoque() < 1) {
-                                System.out.println("Venda abortada. Produto sem estoque.");
-                                continue;
-                            }
+        compra1.setProdutos(listaCompra1);
 
-                            if (vendaController.contarVendasPorCliente(clienteBanco.getId()) >= 3) {
-                                System.out.println("Alerta: cliente atingiu a quantidade maxima de vendas.");
-                                continue;
-                            }
+        System.out.println("Compra1: " + compraController.salvar(compra1));
 
-                            venda.setCliente(clienteBanco);
-                            venda.setValor_total(produtoBanco.getPreco_medio());
-                            venda.setData_venda(LocalDate.now());
+        // =========================
+        // COMPRA 2
+        // =========================
+        Compra compra2 = new Compra();
+        compra2.setId(2);
+        compra2.setData_compra(LocalDate.now());
+        compra2.setValor_total(200.00);
+        compra2.setFornecedor(fornecedor1);
 
-                            System.out.println(vendaController.salvar(venda) ? "Venda realizada." : "Erro na venda.");
-                        }
+        List<CompraProduto> listaCompra2 = new ArrayList<>();
 
-                        else if (opcaoSub == 2) {
-                            System.out.print("ID da venda: ");
-                            int id = Integer.parseInt(sc.nextLine());
+        CompraProduto cp2 = new CompraProduto();
+        cp2.setId(2);
+        cp2.setProduto(produto2);
+        cp2.setCompra(compra2);
+        cp2.setQuantidade(5);
+        cp2.setPreco_unit(20.00);
 
-                            Venda venda = vendaController.pesquisar(id);
+        listaCompra2.add(cp2);
 
-                            if (venda != null) {
-                                System.out.println("Venda ID: " + venda.getId() + " | Valor: " + venda.getValor_total());
-                            } else {
-                                System.out.println("Venda nao encontrada.");
-                            }
-                        }
+        compra2.setProdutos(listaCompra2);
 
-                    } while (opcaoSub != 0);
-                }
+        System.out.println("Compra2: " + compraController.salvar(compra2));
 
-                case 0 -> System.out.println("Saindo...");
-                default -> System.out.println("Opção inválida.");
-            }
+        // =========================
+        // VENDA 1
+        // =========================
+        Venda venda1 = new Venda();
+        venda1.setId(1);
+        venda1.setData_venda(LocalDate.now());
+        venda1.setValor_total(18.00);
+        venda1.setCliente(cliente1);
 
-        } while (opcaoPrincipal != 0);
+        List<VendaProduto> listaVenda1 = new ArrayList<>();
 
-        sc.close();
+        VendaProduto vp1 = new VendaProduto();
+        vp1.setId(1);
+        vp1.setVenda(venda1);
+        vp1.setProduto(produto1);
+        vp1.setQuantidade(2);
+        vp1.setPreco_unitario(9.00);
+
+        listaVenda1.add(vp1);
+
+        venda1.setProdutos(listaVenda1);
+
+        System.out.println("Venda1: " + vendaController.salvar(venda1));
+
+        // =========================
+        // VENDA 2
+        // =========================
+        Venda venda2 = new Venda();
+        venda2.setId(2);
+        venda2.setData_venda(LocalDate.now());
+        venda2.setValor_total(25.00);
+        venda2.setCliente(cliente1);
+
+        List<VendaProduto> listaVenda2 = new ArrayList<>();
+
+        VendaProduto vp2 = new VendaProduto();
+        vp2.setId(2);
+        vp2.setVenda(venda2);
+        vp2.setProduto(produto2);
+        vp2.setQuantidade(1);
+        vp2.setPreco_unitario(25.00);
+
+        listaVenda2.add(vp2);
+
+        venda2.setProdutos(listaVenda2);
+
+        System.out.println("Venda2: " + vendaController.salvar(venda2));
     }
 }
